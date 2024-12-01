@@ -61,6 +61,7 @@
 import pickle
 import gradio as gr
 import pandas as pd
+import os
 
 # Load the model
 with open('model/model.pkl', 'rb') as f:
@@ -122,9 +123,9 @@ interface = gr.Interface(
     outputs=output,
     title="Airline Satisfaction Prediction",
     description="Provide your travel experience ratings and get a recommendation prediction.",
-    theme="compact",  # You can use themes like `default`, `huggingface`, or `compact`.
+    theme="default",  # You can use themes like `default`, `huggingface`, or `compact`.
     live=False
 )
 
 # Launch the Gradio app
-interface.launch()
+interface.launch(server_name="0.0.0.0", server_port=int(os.getenv("PORT", 7860)))
